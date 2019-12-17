@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: drone
+spec:
+  selector:
+    matchLabels:
+      app: drone
+  template:
+    metadata:
+      labels:
+        app: drone
+    spec:
+      containers:
+      - name: drone
+        image: drone/drone:1
+        env:
+        - name: DRONE_GITEA_CLIENT_ID
+          value: "df1394f4-b26a-46c9-9519-d9b1ae2aef9d"
+        - name: DRONE_GITEA_CLIENT_SECRET 
+          value: "lCEWFt_4ZO_hxjqawbxOvWRRujJCdqY_u0SSCB5-rkY=" 
+        - name: DRONE_GITEA_SERVER
+          value: "http://gitea"
+        - name: DRONE_RPC_SECRET
+          value: "a7546effc09900ff8f823f9d5f28e185"
+        - name: DRONE_SERVER_HOST
+          value: "drone"
+        - name: DRONE_SERVER_PROTO
+          value: "http"
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "200m"
+        ports:
+        - containerPort: 80
